@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Методичка • AMAZING BLACK RP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #08090c;
+      --bg-card: #12151a;
+      --bg-sidebar: #0b0d12;
+      --border: #1e2229;
+      --text-primary: #eaecef;
+      --text-secondary: #a0a7b5;
+      --text-muted: #6a7078;
+      --accent: #a684e6;
+      --red-bright: #f85149;
+      --green: #3fb950;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --sidebar-width: 280px;
+      --transition: 0.25s ease;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      position: relative;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        radial-gradient(circle at 30% 50%, rgba(130, 80, 200, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 20%, rgba(50, 60, 100, 0.08) 0%, transparent 50%);
+      background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii42NSIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iLjAzIi8+PC9zdmc+');
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background-color: rgba(11, 13, 18, 0.85);
+      backdrop-filter: blur(15px);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      transition: transform var(--transition);
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 28px 20px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .sidebar-header .subtitle {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+
+    .search-box {
+      margin: 16px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 10px 14px 10px 38px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .search-box .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 8px 12px;
+      flex: 1;
+    }
+
+    .nav-list li {
+      margin-bottom: 2px;
+    }
+
+    .nav-list a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .nav-list a:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: #ffffff;
+    }
+
+    .nav-list a.active {
+      background-color: rgba(130, 80, 200, 0.1);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .nav-list .icon {
+      font-size: 1.1rem;
+      width: 22px;
+      text-align: center;
+    }
+
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 32px 40px 80px;
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .section-header .breadcrumb {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition);
+      margin-bottom: -1px;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .card {
+      background-color: rgba(18, 21, 26, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      transition: all var(--transition);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card p, .card li {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .card ul, .card ol {
+      padding-left: 24px;
+      margin-bottom: 12px;
+    }
+
+    .card ul li, .card ol li {
+      margin-bottom: 6px;
+    }
+
+    .code-block {
+      background-color: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #bcc4cd;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+
+    .warning {
+      background-color: rgba(248, 81, 73, 0.08);
+      border-left: 3px solid var(--red-bright);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 0.85rem;
+      color: var(--red-bright);
+    }
+
+    .note {
+      background-color: rgba(130, 80, 200, 0.08);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    .tactic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .tactic-card {
+      background-color: rgba(18, 21, 26, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      transition: all var(--transition);
+    }
+
+    .tactic-card:hover {
+      border-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .tactic-card h4 {
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .placeholder-img {
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin: 12px 0;
+    }
+
+    /* ---------- ФУТЕР ---------- */
+    .site-footer {
+      position: fixed;
+      bottom: 20px;
+      left: 24px;
+      text-align: left;
+      color: #5f6875;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      z-index: 5;
+      line-height: 1.6;
+      background: rgba(8, 9, 12, 0.7);
+      backdrop-filter: blur(5px);
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all var(--transition);
+    }
+
+    .site-footer:hover {
+      color: #a0a7b5;
+      border-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .site-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- ФИКСИРОВАННЫЙ WATERMARK БЕЙДЖ ---------- */
+    .watermark-badge {
+      position: fixed;
+      bottom: 20px;
+      left: 24px;
+      background: rgba(18, 21, 26, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+      z-index: 105; /* Выше сайдбара и основного контента */
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      pointer-events: auto;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    }
+
+    .watermark-badge span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .watermark-badge:hover {
+      transform: translateY(-3px);
+      background: rgba(18, 21, 26, 0.8);
+      border-color: rgba(166, 132, 230, 0.3); /* Плавное свечение рамки в цвет акцента */
+      box-shadow: 0 6px 20px rgba(130, 80, 200, 0.15);
+    }
+
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 200;
+      background: var(--bg-sidebar);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 24px 18px 80px;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .tactic-grid {
+        grid-template-columns: 1fr;
+      }
+      .section-header h1 {
+        font-size: 1.6rem;
+      }
+      .site-footer {
+        left: 12px;
+        bottom: 12px;
+        font-size: 0.65rem;
+        padding: 6px 10px;
+      }
+      .watermark-badge {
+        left: 12px;
+        bottom: 12px;
+        font-size: 0.7rem;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>📋 МЕТОДИЧКА</h2>
+      <div class="subtitle">AMAZING BLACK RP</div>
+    </div>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Поиск по разделам...">
+    </div>
+    <ul class="nav-list">
+      <li><a data-section="svu" class="active"><span class="icon">💣</span> СВУ / Разминирование</a></li>
+      <li><a data-section="pdp"><span class="icon">🏥</span> Первая помощь (ПДП)</a></li>
+      <li><a data-section="assault"><span class="icon">⚔️</span> Штурм</a></li>
+      <li><a data-section="negotiations"><span class="icon">🎙️</span> Переговоры</a></li>
+      <li><a data-section="stretch"><span class="icon">🪤</span> Растяжки</a></li>
+      <li><a data-section="rp"><span class="icon">📝</span> RP Отыгровки</a></li>
+      <li><a data-section="dictionary"><span class="icon">📖</span> Справочник (НПА)</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content" id="mainContent">
+    <div class="section-header">
+      <h1 id="sectionTitle">СВУ / Разминирование</h1>
+      <div class="breadcrumb">Главная / <span id="breadcrumbPath">СВУ</span></div>
+    </div>
+    <div class="tabs" id="tabsContainer"></div>
+    <div id="tabContentArea"></div>
+  </main>
+
+  <div class="site-footer">
+    Created by: <a href="#" target="_blank">Brian_Taylor</a>
+  </div>
+
+  <div class="watermark-badge">
+    Created by: <span>Brian_Taylor</span>
+  </div>
+
+  <script>
+    (function() {
+      const contentData = {
+        svu: {
+          title: 'СВУ / Разминирование',
+          breadcrumb: 'СВУ',
+          tabs: [
+            { id: 'theory', label: '📘 Теория' },
+            { id: 'algorithm', label: '⚙️ Алгоритм' },
+            { id: 'rp_do', label: '🎮 Отыгровки (/do)' },
+            { id: 'rp_try', label: '🎮 Отыгровки (/try)' }
+          ],
+          content: {
+            theory: `
+              <div class="card">
+                <h3>💣 Классификация взрывных устройств</h3>
+                <p>Взрывное устройство (ВУ) — техническое устройство одноразового применения, обладающее способностью взрываться. Состоит из заряда взрывчатого вещества (ВВ) и средства взрывания (детонатора).</p>
+                <p><strong>Типы ВУ:</strong></p>
+                <ul>
+                  <li><strong>Самодельное взрывное устройство (СВУ)</strong> — изготовлено кустарно. Делится на <em>механические</em> (проводное управление, таймер) и <em>дистанционные</em> (радиоуправление, C4).</li>
+                  <li><strong>Растяжки</strong> — мины-ловушки, использующие натяжную проволоку или леску.</li>
+                  <li><strong>Мины</strong> — скрытно установленные ВУ с нажимным, натяжным или комбинированным взрывателем.</li>
+                </ul>
+                <div class="note">Пояс смертника запрещён на сервере BLACK. Данный тип ВУ исключён из методички.</div>
+              </div>
+              <div class="card">
+                <h3>🔧 Справочник устройств</h3>
+                <ul>
+                  <li><strong>БРВУ "Пелена 12-М"</strong> — блокиратор радиовзрывных устройств. Создаёт помехи в радиусе 60 метров, предотвращая дистанционный подрыв.</li>
+                  <li><strong>ДРП (Детектор радиопомех)</strong> — устройство для поиска ВУ. Три лампы: <span style="color:#f85149">красная</span> (15–30 м), <span style="color:#d29922">жёлтая</span> (5–15 м), <span style="color:#3fb950">зелёная</span> (0–5 м).</li>
+                  <li><strong>КТЗ "Дублон-2"</strong> — костюм телесной защиты сапёра. Защищает жизненно важные органы при подрыве.</li>
+                  <li><strong>ЭТЦ-3</strong> — тяжёлый взрывозащитный контейнер (до 360 кг). Для длительных перевозок.</li>
+                  <li><strong>Локализатор "Фонтан-2"</strong> — лёгкий контейнер (30–40 кг). Для коротких дистанций.</li>
+                  <li><strong>Мультиметр</strong> — прибор для измерения напряжения. Режим постоянного тока 200В.</li>
+                  <li><strong>Бокорезы, изолированный нож, индикаторная отвёртка</strong> — инструменты для работы с проводами и корпусом.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>🎒 Набор сапёра (в кейсе)</h3>
+                <p>Перед началом работы убедись, что всё необходимое находится в багажнике служебного транспорта. Часть предметов уже уложена в кейс сапёра.</p>
+                <p><strong>Из багажника нужно достать:</strong></p>
+                <ul>
+                  <li>КТЗ "Дублон-2"</li>
+                  <li>БРВУ "Пелена 12-М"</li>
+                  <li>ДРП</li>
+                  <li>Взрывозащитный контейнер (ЭТЦ-3 или Фонтан-2)</li>
+                  <li>Катушка с медной проволокой (для подрыва)</li>
+                  <li>Детонатор</li>
+                </ul>
+                <p><strong>Внутри кейса сапёра находятся:</strong></p>
+                <ul>
+                  <li>Мультиметр</li>
+                  <li>Бокорезы</li>
+                  <li>Изолированный нож</li>
+                  <li>Фонарик</li>
+                  <li>Индикаторная отвёртка</li>
+                  <li>Резиновые перчатки</li>
+                </ul>
+                <div class="warning">Пелена-12 и ЭТЦ-3 тяжёлые — для их переноски требуются минимум два человека.</div>
+              </div>
+              <div class="card">
+                <h3>⚡ Иерархия проводов (порядок перекусывания)</h3>
+                <p><em>Ошибка в порядке — гарантированный подрыв.</em></p>
+                <ol>
+                  <li><strong>Фазный</strong> (+23.6…+23.9 В) — подача напряжения на корпус.</li>
+                  <li><strong>Заземление</strong> (0 В, жёлто-зелёный) — защита от неконтролируемого взрыва.</li>
+                  <li><strong>Телемеханика</strong> (0–5 В, нестабильно при БРВУ) — канал дистанционного управления.</li>
+                  <li><strong>Дискретный</strong> (0 В) — передача сигнала на детонатор после истечения таймера. Отсутствует, если нет таймера.</li>
+                  <li><strong>Минусовой</strong> (-23.6…-23.9 В) — обратная подача напряжения.</li>
+                </ol>
+                <div class="note">Обычно в СВУ бывает от 2 до 5 проводов. Если таймера нет, дискретный провод не устанавливается. Порядок перекусывания всегда один и тот же: сначала плюс, потом минус, в конце ноль.</div>
+              </div>
+            `,
+            algorithm: `
+              <div class="card">
+                <h3>📋 Общий протокол обезвреживания</h3>
+                <ol>
+                  <li>Оценить обстановку, убедиться в отсутствии гражданских лиц.</li>
+                  <li>Снять бронежилет, каску, разгрузку, сложить в багажник.</li>
+                  <li>Надеть КТЗ "Дублон-2" и резиновые перчатки.</li>
+                  <li>С помощью ДРП или визуально обнаружить ВУ.</li>
+                  <li>Вернуться к машине, взять Пелену-12 (при помощи напарника), установить и включить её рядом с ВУ.</li>
+                  <li>Расположить кейс сапёра на расстоянии одного метра от ВУ.</li>
+                  <li>Осмотреть ВУ. Определить тип, количество болтов на крышке (обычно 3-4), наличие ловушек (леска, контакт), количество проводов, наличие таймера.</li>
+                  <li>Проверить напряжение каждого провода мультиметром. Черный щуп — на корпус (если металлический) или на заземление/металлическую раму, красный — по очереди на каждый провод.</li>
+                  <li>Перекусить провода строго по иерархии (сначала "+", потом "-", потом "0").</li>
+                  <li>Извлечь взрыватель, капсюль, тротиловую шашку.</li>
+                  <li>Упаковать компоненты в контейнер, вывезти на полигон ВЧ для контролируемого подрыва.</li>
+                </ol>
+                <div class="warning">Если на таймере менее 3 минут — разминирование запрещено! Сброс в море.</div>
+              </div>
+              <div class="card">
+                <h3>🔍 СВУ дистанционного типа (C4) — подробный алгоритм (/do)</h3>
+                <p><strong>Этап 1: Поиск и подготовка</strong></p>
+                <ol>
+                  <li>/me достаёт ДРП из багажника, включает, смотрит на лампу.</li>
+                  <li>/do Какой цвет горит на лампочке? — <span style="color:#f85149">Красный</span>: двигаться в сторону увеличения сигнала, продолжать опрос. <span style="color:#d29922">Жёлтый</span>: замедлиться, СВУ близко. <span style="color:#3fb950">Зелёный</span>: СВУ в пределах видимости.</li>
+                  <li>/me выключает ДРП, убирает. Возвращается к машине, вместе с напарником берёт Пелену-12, устанавливает и включает.</li>
+                </ol>
+                <p><strong>Этап 2: Осмотр корпуса</strong></p>
+                <ol>
+                  <li>/do Сколько болтов я вижу на крышке? — Отыгровщик называет количество (обычно 3 или 4).</li>
+                  <li>/me индикаторной отвёрткой откручивает болты.</li>
+                  <li>/me аккуратно приподнимает крышку, светит фонариком внутрь.</li>
+                  <li>/do Есть ли под крышкой ловушка (леска, контакт)? — <span style="color:#3fb950">Нет</span>: продолжаем. <span style="color:#f85149">Да</span>: обнаружена леска, ведущая к взрывателю. /me изолированным ножом перерезает леску.</li>
+                </ol>
+                <p><strong>Этап 3: Анализ проводов</strong></p>
+                <ol>
+                  <li>/me достаёт мультиметр, выставляет режим 200В постоянного тока. Чёрный щуп — на металлический корпус (или заземление/раму, если корпус неметаллический).</li>
+                  <li>/me красным щупом касается первого провода.</li>
+                  <li>/do Какое напряжение показывает мультиметр на первом проводе? — Отыгровщик называет значение (например, +24.1В). Это Фазный (+).</li>
+                  <li>/me переставляет красный щуп на второй провод.</li>
+                  <li>/do Какое напряжение на втором проводе? — Отыгровщик называет значение (например, 0В). Это Заземление (0).</li>
+                  <li>Повторить для всех оставшихся проводов, запомнить порядок.</li>
+                </ol>
+                <p><strong>Этап 4: Перекусывание</strong></p>
+                <ol>
+                  <li>/me берёт бокорезы, перекусывает первый провод (Фазный).</li>
+                  <li>/me перекусывает остальные провода строго по иерархии: Фазный → Заземление → Телемеханика (если есть) → Дискретный (если есть) → Минусовой.</li>
+                </ol>
+                <p><strong>Этап 5: Извлечение заряда</strong></p>
+                <ol>
+                  <li>/me изолированным ножом вынимает тротиловую шашку, отделяет взрыватель, затем капсюль.</li>
+                  <li>/do Взрыватель деактивирован? — <span style="color:#3fb950">Да</span>: СВУ обезврежено. <span style="color:#f85149">Нет</span>: остаточный заряд → немедленно в контейнер!</li>
+                  <li>/me укладывает компоненты в контейнер, закрывает. Вывозит на полигон ВЧ.</li>
+                </ol>
+              </div>
+              <div class="card">
+                <h3>🔧 СВУ механического типа — подробный алгоритм (/do)</h3>
+                <p><em>Отличается отсутствием провода телемеханики. Порядок перекусывания: Фазный → Заземление → Дискретный (если есть таймер) → Минусовой.</em></p>
+                <p><strong>Этап 1: Поиск и подготовка</strong></p>
+                <ol>
+                  <li>/me достаёт ДРП из багажника, включает, смотрит на лампу.</li>
+                  <li>/do Какой цвет горит на лампочке? — <span style="color:#f85149">Красный</span>: двигаться в сторону увеличения сигнала, продолжать опрос. <span style="color:#d29922">Жёлтый</span>: замедлиться, СВУ близко. <span style="color:#3fb950">Зелёный</span>: СВУ в пределах видимости.</li>
+                  <li>/me выключает ДРП, убирает. Возвращается к машине, вместе с напарником берёт Пелену-12, устанавливает и включает.</li>
+                </ol>
+                <p><strong>Этап 2: Осмотр корпуса</strong></p>
+                <ol>
+                  <li>/do Сколько болтов я вижу на крышке? — Отыгровщик называет количество (обычно 3 или 4).</li>
+                  <li>/me индикаторной отвёрткой откручивает болты.</li>
+                  <li>/me аккуратно приподнимает крышку, светит фонариком внутрь.</li>
+                  <li>/do Есть ли под крышкой ловушка (леска, контакт)? — <span style="color:#3fb950">Нет</span>: продолжаем. <span style="color:#f85149">Да</span>: обнаружена леска, ведущая к взрывателю. /me изолированным ножом перерезает леску.</li>
+                </ol>
+                <p><strong>Этап 3: Анализ проводов</strong></p>
+                <ol>
+                  <li>/me достаёт мультиметр, выставляет режим 200В постоянного тока. Чёрный щуп — на металлический корпус (или заземление/раму, если корпус неметаллический).</li>
+                  <li>/me красным щупом касается первого провода.</li>
+                  <li>/do Какое напряжение показывает мультиметр на первом проводе? — Отыгровщик называет значение (например, +24.1В). Это Фазный (+).</li>
+                  <li>/me переставляет красный щуп на второй провод.</li>
+                  <li>/do Какое напряжение на втором проводе? — Отыгровщик называет значение (например, 0В). Это Заземление (0).</li>
+                  <li>Повторить для оставшихся проводов. Если есть таймер — будет дискретный (0В), затем минусовой (-).</li>
+                </ol>
+                <p><strong>Этап 4: Перекусывание</strong></p>
+                <ol>
+                  <li>/me берёт бокорезы, перекусывает первый провод (Фазный).</li>
+                  <li>/me перекусывает остальные провода строго по иерархии: Фазный → Заземление → Дискретный (если есть) → Минусовой.</li>
+                </ol>
+                <p><strong>Этап 5: Извлечение заряда</strong></p>
+                <ol>
+                  <li>/me изолированным ножом вынимает тротиловую шашку, отделяет взрыватель, затем капсюль.</li>
+                  <li>/do Взрыватель деактивирован? — <span style="color:#3fb950">Да</span>: СВУ обезврежено. <span style="color:#f85149">Нет</span>: остаточный заряд → немедленно в контейнер!</li>
+                  <li>/me укладывает компоненты в контейнер, закрывает. Вывозит на полигон ВЧ.</li>
+                </ol>
+              </div>
+              <div class="card">
+                <h3>💥 Контролируемый подрыв</h3>
+                <p>Яма 2-3 м у бетонной стены полигона ВЧ. Поместить СВУ, подсоединить медную проволоку, протянуть на 100 м. Подключить детонатор. Лечь за укрытие, зажать кнопку.</p>
+              </div>
+            `,
+            rp_do: `
+              <div class="card">
+                <h3>👥 Отыгровка через /do (с отыгровщиком)</h3>
+                <p><em>Используется, когда есть второй игрок (админ, инструктор, партнёр по RP), который отвечает на /do.</em></p>
+                <div class="code-block">/me берёт набор сапёра, ДРП, ЗКС, Пелену-12 и кейс из багажника.
+/me одевает ЗКС.
+/me достаёт ДРП, включает, смотрит на лампу.
+/do Какой цвет горит на лампочке?
+((отыгр.)) /do Красный.
+/do Какой цвет сейчас?
+((отыгр.)) /do Жёлтый.
+/do Какой цвет сейчас?
+((отыгр.)) /do Зелёный.
+/me выключает ДРП, возвращается к машине, вместе с напарником берёт Пелену-12, устанавливает, включает.
+/do Сколько болтов на крышке?
+((отыгр.)) /do 4.
+/me откручивает болты индикаторной отвёрткой.
+/me приподнимает крышку, светит фонариком.
+/do Есть ли ловушка под крышкой?
+((отыгр.)) /do Да, леска к взрывателю.
+/me изолированным ножом перерезает леску.
+/me достаёт мультиметр, выставляет 200В DC.
+/me чёрный щуп на корпус, красный на первый провод.
+/do Напряжение на первом проводе?
+((отыгр.)) /do +24.1.
+/me переставляет красный щуп на второй провод.
+/do Напряжение на втором проводе?
+((отыгр.)) /do 0.
+/me переставляет щуп на третий провод.
+/do Напряжение на третьем проводе?
+((отыгр.)) /do -24.1.
+/me убирает мультиметр, берёт бокорезы.
+/me перекусывает провода по порядку: первый, третий, второй.
+/me ножом вынимает шашку, отделяет взрыватель, капсюль.
+/do Взрыватель деактивирован?
+((отыгр.)) /do Да.
+/me укладывает всё в контейнер, закрывает.</div>
+              </div>
+            `,
+            rp_try: `
+              <div class="card">
+                <h3>🎮 Отыгровка через /try (без второго игрока)</h3>
+                <p><em>Используется, когда нет отыгровщика и администрация разрешила использовать /try.</em></p>
+                <div class="code-block">/me берёт набор сапёра, ДРП, ЗКС, Пелену-12 и кейс.
+/me одевает ЗКС.
+/me включает ДРП, смотрит на лампочку.
+/try Лампочка красная? | Удачно
+/try Лампочка жёлтая? | Удачно
+/try Лампочка зелёная? | Удачно
+/me выключает ДРП, идёт за Пеленой-12, вместе с напарником устанавливает и включает.
+/me осматривает СВУ.
+/try На крышке 4 болта? | Удачно
+/me откручивает болты.
+/me приподнимает крышку, светит фонариком.
+/try Леска под крышкой? | Неудачно
+/do Леска не обнаружена.
+/me достаёт мультиметр, 200В DC. Чёрный щуп на корпус, красный на первый провод.
+/try Напряжение 24.1В? | Удачно
+/me переставляет щуп на второй провод.
+/try Напряжение 0В? | Удачно
+/me переставляет щуп на третий провод.
+/try Напряжение -24.1В? | Удачно
+/me бокорезами перекусывает провода: 1-й, 3-й, 2-й.
+/me извлекает шашку, отделяет взрыватель и капсюль.
+/me укладывает в контейнер.</div>
+              </div>
+            `
+          }
+        },
+        pdp: {
+          title: 'Первая помощь (ПДП)',
+          breadcrumb: 'ПДП',
+          tabs: [
+            { id: 'theory', label: '📘 Теория' },
+            { id: 'algorithm', label: '⚙️ Алгоритм' },
+            { id: 'rp', label: '🎮 Отыгровки' }
+          ],
+          content: {
+            theory: `
+              <div class="card">
+                <h3>🩺 Принципы первой доврачебной помощи</h3>
+                <p>Первая доврачебная помощь (ПДП) — комплекс срочных мероприятий до прибытия скорой медицинской помощи. Правильная ПДП сокращает время восстановления и спасает жизнь.</p>
+                <p><strong>Главные правила:</strong></p>
+                <ul>
+                  <li>Обеспечить безопасность себе и пострадавшему.</li>
+                  <li>Не давать медикаменты (аллергия неизвестна).</li>
+                  <li>Не извлекать предметы из раны.</li>
+                  <li>Приоритет: остановка критического кровотечения > дыхание > сознание.</li>
+                </ul>
+                <p><strong>Перечень состояний для оказания ПДП:</strong> отсутствие сознания, остановка дыхания или кровообращения, наружные кровотечения, инородные тела дыхательных путей, травмы различных областей тела, ожоги, обморожения, отравления, пулевые/осколочные/ножевые ранения.</p>
+              </div>
+              <div class="card">
+                <h3>🩺 Зоны опасности при оказании помощи</h3>
+                <p><strong>Красная зона:</strong> прямая угроза жизни (обстрел, огонь, заражение). Работать только с оружием, быстрая эвакуация пострадавшего.</p>
+                <p><strong>Жёлтая зона:</strong> относительная безопасность (место происшествия, нет активной угрозы). Оказание помощи с ограничением по времени, постоянный контроль обстановки.</p>
+                <p><strong>Зелёная зона:</strong> безопасная зона (пункт сбора, машина скорой). Полный объём помощи, подготовка к транспортировке.</p>
+              </div>
+              <div class="card">
+                <h3>🩺 Виды кровотечений</h3>
+                <ul>
+                  <li><strong>Капиллярное</strong> — равномерное сочение, тёмно-красное. Опасность заражения.</li>
+                  <li><strong>Венозное</strong> — тёмно-вишнёвая кровь, вытекает струёй. Опасность воздушной эмболии.</li>
+                  <li><strong>Артериальное</strong> — ярко-алая, пульсирует фонтаном. Смерть за 2-3 минуты.</li>
+                  <li><strong>Смешанное</strong> — сочетание артериального и венозного (например, отрыв конечности).</li>
+                  <li><strong>Паренхиматозное</strong> — внутреннее кровотечение из органов. Симптомы: слабость, бледность, холодный пот.</li>
+                </ul>
+                <p>У здорового человека в среднем 4-5 литров крови.</p>
+              </div>
+              <div class="card">
+                <h3>🩺 Ожоги и обморожения</h3>
+                <p>Ожоги I–IV степени. Первая помощь: охлаждение водой 15-20 мин. Запрещено прокалывать пузыри, наносить масло.</p>
+                <p>Обморожения: постепенное согревание, растирание тканью (не снегом), горячее питьё.</p>
+              </div>
+              <div class="card">
+                <h3>🩺 Переломы</h3>
+                <p>Закрытые (без раны) и открытые (кость наружу). При открытых — сначала остановить кровь, затем шина. Шина фиксирует два сустава.</p>
+              </div>
+              <div class="card">
+                <h3>🩺 Клиническая смерть</h3>
+                <p>Отсутствие сознания, дыхания, пульса на сонной артерии.</p>
+              </div>
+            `,
+            algorithm: '',
+            rp: ''
+          }
+        },
+        assault: { title: 'Штурм', breadcrumb: 'Штурм', tabs: [], content: {} },
+        negotiations: { title: 'Переговоры', breadcrumb: 'Переговоры', tabs: [], content: {} },
+        stretch: { title: 'Растяжки', breadcrumb: 'Растяжки', tabs: [], content: {} },
+        rp: { title: 'RP Отыгровки', breadcrumb: 'RP Отыгровки', tabs: [], content: {} },
+        dictionary: { title: 'Справочник (НПА)', breadcrumb: 'Справочник', tabs: [], content: {} }
+      };
+
+      let currentSection = 'svu';
+      let currentTab = 'theory';
+
+      const sidebar = document.getElementById('sidebar');
+      const menuToggle = document.getElementById('menuToggle');
+      const searchInput = document.getElementById('searchInput');
+      const navLinks = document.querySelectorAll('.nav-list a');
+      const sectionTitle = document.getElementById('sectionTitle');
+      const breadcrumbPath = document.getElementById('breadcrumbPath');
+      const tabsContainer = document.getElementById('tabsContainer');
+      const tabContentArea = document.getElementById('tabContentArea');
+
+      function init() {
+        renderSection();
+        
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!sidebar.contains(e.target) && e.target !== menuToggle && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            currentSection = this.getAttribute('data-section');
+            const data = contentData[currentSection];
+            currentTab = data.tabs && data.tabs.length > 0 ? data.tabs[0].id : '';
+            renderSection();
+            if (window.innerWidth <= 768) {
+              sidebar.classList.remove('open');
+            }
+          });
+        });
+
+        searchInput.addEventListener('input', function() {
+          const query = this.value.toLowerCase();
+          navLinks.forEach(link => {
+            const text = link.textContent.toLowerCase();
+            if (text.includes(query)) {
+              link.parentElement.style.display = 'block';
+            } else {
+              link.parentElement.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      function renderSection() {
+        const data = contentData[currentSection];
+        sectionTitle.textContent = data.title;
+        breadcrumbPath.textContent = data.breadcrumb;
+
+        tabsContainer.innerHTML = '';
+        if (data.tabs && data.tabs.length > 0) {
+          data.tabs.forEach(tab => {
+            const btn = document.createElement('button');
+            btn.className = `tab-btn ${tab.id === currentTab ? 'active' : ''}`;
+            btn.textContent = tab.label;
+            btn.addEventListener('click', () => {
+              currentTab = tab.id;
+              document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              renderContent();
+            });
+            tabsContainer.appendChild(btn);
+          });
+          renderContent();
+        } else {
+          tabContentArea.innerHTML = '<div class="card"><p>Раздел находится в разработке или пуст.</p></div>';
+        }
+      }
+
+      function renderContent() {
+        const data = contentData[currentSection];
+        const html = data.content[currentTab] || '<div class="card"><p>Нет содержимого для этой вкладки.</p></div>';
+        tabContentArea.innerHTML = html;
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
